@@ -1,4 +1,0 @@
-[submodule "site/pages-gem"]
-	path = site/pages-gem
-	url = git@github.com:mrmanc/pages-gem.git
-	branch = add-webrick
