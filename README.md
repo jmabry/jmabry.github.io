@@ -3,4 +3,4 @@
 /docs
 A personal blog site
 
-To serve the blog site, see README in https://github.com/jmabry/jekyll-serve.
+To serve the blog site, `SITE=../site make -C blog/pages-gem server`
