@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "torch-hist"
+version = "0.1.0"
+description = ""
+authors = ["jmabry <joshua.mabry@bain.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "^2.3.0"
+torchist = "^0.2.3"
+ipython = "^8.25.0"
+jupyter = "^1.0.0"
+numpy = "^1.26.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
