@@ -8,7 +8,9 @@ RUN apt-get update \
     locales \
     nodejs
 
-COPY Gemfile Gemfile
+WORKDIR /src/site
+
+COPY Gemfile /src/site/Gemfile
 
 RUN NOKOGIRI_USE_SYSTEM_LIBRARIES=true bundle install
 
@@ -19,4 +21,4 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
-CMD ["jekyll", "serve", "-H", "0.0.0.0", "-P", "4000"]
+CMD ["jekyll", "serve", "--watch", "-H", "0.0.0.0", "-P", "4000"]

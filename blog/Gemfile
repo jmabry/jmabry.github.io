@@ -1,16 +1,22 @@
-# frozen_string_literal: true
-
 source "https://rubygems.org"
 
+gem "github-pages", group: :jekyll_plugins
 
-# Manage our dependency on the version of the github-pages gem here.
-gem "github-pages", "= 231"
-gem 'tzinfo-data'
-gem 'jekyll-algolia'
+gem "tzinfo-data"
+gem "wdm", "~> 0.1.0" if Gem.win_platform?
+
 gem 'webrick'
+gem 'faraday'
 
-# Explicitly include this gem here.
-# It is not directly included in the github-pages gem list of dependencies,
-# even though it is included in the original GitHub Pages build infrastructure.
-gem "jekyll-include-cache", "= 0.2.1"
-gem "jekyll-octicons", "~> 14.2"
+# If you have any plugins, put them here!
+group :jekyll_plugins do
+  gem "jekyll-paginate"
+  gem "jekyll-sitemap"
+  gem "jekyll-gist"
+  gem "jekyll-feed"
+  gem "jemoji"
+  gem "jekyll-include-cache"
+  gem "jekyll-algolia"
+  gem "jekyll-octicons"
+  gem "jekyll-remote-theme"
+end

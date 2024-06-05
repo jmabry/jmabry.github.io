@@ -12,18 +12,16 @@ image:
 server:
 	${DOCKER} run --rm -it \
 		-p 4000:4000 \
-		-u `id -u`:`id -g` \
 		-v `realpath ${SITE}`:/src/site \
 		-w /src/site \
 		${TAG}
 
-# terminal:
-#     ${DOCKER} run --rm -it \
-#         -p 4000:4000 \
-#         -u `id -u`:`id -g` \
-#         -v `realpath ${SITE}`:/src/site \
-#         -w /src/site \
-#         ${TAG} /bin/bash
+shell:
+	${DOCKER} run --rm -it \
+		-p 4000:4000 \
+		-v `realpath ${SITE}`:/src/site \
+		-w /src/site \
+		${TAG} /bin/bash
 
 .PHONY:
-	image server terminal
+	image server shell
