@@ -3,6 +3,8 @@ permalink: /about/
 title: "About Joshua Mabry"
 ---
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+I am a data scientist and engineer with experience spanning consulting, biotech, and academic research.
 
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+I like building large-scale systems that blend experimentation, modeling, and optimization. I have designed and analyzed thousands of experiments throughout my career and so I try to keep adding to this spike, while picking up other tools I need to be effective (MLOps, Causal Inference, Cloud / Data Engineering, GenAI...).
+
+On this blog, I share technical insights from building ML systems, code snippets, and the occasional thoughts on working as a data science and engineering leader.
