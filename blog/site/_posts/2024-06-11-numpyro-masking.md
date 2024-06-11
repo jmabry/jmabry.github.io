@@ -1,27 +1,19 @@
 ---
-jupyter:
-  jupytext:
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.16.1
-  kernelspec:
-    display_name: Python 3 (ipykernel)
-    language: python
-    name: python3
+layout: notebook
+permalink: /2024-06-11-numpyro-masking
+filename: "MaskHandlerExample.ipynb"
+title: Masked Observations with NumPyro
+category: "ML"
+tags: ["Numpyro", "Bayesian", ]
 ---
 
-<!-- #region -->
-# Masked Observations with NumPyro
-We are interested in building a factorized model in NumPyro that is a highly simplified version of retail shopping, where a customer with features $X$ decides whether or not to visit a store and which items in the store to purchase if they do visit. NumPyro provides an effect handler `mask` that seems like it could handle the job. This notebook explores if this effect handler indeed helps us to correctly estimate the model parameters.
+We are interested in building a factorized model in NumPyro that is a highly simplified version of retail shopping, where a customer with features $X$ decides whether or not to visit a store and which items in the store to purchase if they do visit. NumPyro provides an effect handler `mask` that seems like it could handle the job. This notebook demonstrates how to use the effect handler to correctly estimate the model parameters.
 
 
 ## Model description
 Let $X \in \mathbb{R}^D$  be a vector of features of length $D$.
 
 We aim to model the joint probability $P(Y_0, Y_1 | X)$ where:
-
  - $Y_0$ is a binary outcome.
  - $Y_1 \in \{0, 1\}^I$ is a vector of binary outcomes of length $I$.
  
@@ -48,9 +40,7 @@ and
 $$
 P(Y_0 = 0 | X) = 1 - P(Y_0 = 1 | X).
 $$
-<!-- #endregion -->
 
-<!-- #region -->
 
 
 ### Modeling $P(Y_1 | Y_0 = 1, X))$
@@ -81,7 +71,6 @@ $$
 # Simulated dataset
 We simulate some data according to this model
 
-<!-- #endregion -->
 
 ```python
 import numpy as np
@@ -193,6 +182,9 @@ simple_param_estimates = get_predictive_posterior_samples(simple_model)
 mask_handler_param_estimates = get_predictive_posterior_samples(mask_handler_model)
 ```
 
+    sample: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 1500/1500 [00:07<00:00, 190.44it/s, 7 steps of size 6.25e-01. acc. prob=0.89]
+    sample: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 1500/1500 [00:08<00:00, 180.05it/s, 7 steps of size 5.28e-01. acc. prob=0.91]
+
 ```python
 param_names = ["Y0_beta", "Y0_intercept", "Y1_given_Y0_beta", "Y1_given_Y0_intercept"]
 
@@ -220,6 +212,31 @@ for param_name in param_names:
     print()
 ```
 
+    Y0_beta
+       ground_truth      mean       std
+    0      0.371232  0.355485  0.024675
+    1      0.304784  0.290453  0.025540
+    2      0.504125  0.475702  0.027870
+    
+    Y0_intercept
+       ground_truth      mean       std
+    0      1.352996  1.345138  0.026762
+    
+    Y1_given_Y0_beta
+       ground_truth      mean       std
+    0     -2.474242 -1.030060  0.029048
+    1     -1.462732 -0.525774  0.025773
+    2      1.257190  0.879122  0.026619
+    3      2.196709  1.466483  0.032559
+    4     -0.646848 -0.204878  0.025808
+    5      0.477828  0.511528  0.025175
+    
+    Y1_given_Y0_intercept
+       ground_truth      mean       std
+    0      0.448704 -0.461200  0.024793
+    1      0.887091  0.016012  0.023572
+
+
 From inspection, we can see the parameter estimates for our simple model are not correct. Now let's look at the model with masking.
 
 ```python
@@ -230,3 +247,28 @@ for param_name in param_names:
     print(param_stats.iloc[:,:3])
     print()
 ```
+
+    Y0_beta
+       ground_truth      mean       std
+    0      0.371232  0.354625  0.025204
+    1      0.304784  0.289758  0.025788
+    2      0.504125  0.475834  0.025870
+    
+    Y0_intercept
+       ground_truth      mean       std
+    0      1.352996  1.345155  0.025662
+    
+    Y1_given_Y0_beta
+       ground_truth      mean       std
+    0     -2.474242 -2.559169  0.060795
+    1     -1.462732 -1.450007  0.046866
+    2      1.257190  1.282532  0.043331
+    3      2.196709  2.290085  0.053606
+    4     -0.646848 -0.649854  0.037008
+    5      0.477828  0.455630  0.035820
+    
+    Y1_given_Y0_intercept
+       ground_truth      mean       std
+    0      0.448704  0.516614  0.038727
+    1      0.887091  0.953112  0.034819
+

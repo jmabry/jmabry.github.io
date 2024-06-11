@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "numpyro-masking"
+version = "0.1.0"
+description = ""
+authors = ["jmabry <mabryjn@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpyro = "^0.15.0"
+jupyter = "^1.0.0"
+pandas = "^2.2.2"
+jupyter-contrib-nbextensions = "^0.7.0"
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
