@@ -1,0 +1,16 @@
+project:
+  type: website
+
+website:
+  title: "PainpointsPurelyTechnical"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/jmabry
+      - icon: twitter
+        href: https://twitter.com/MabryJoshua
+format:
+  html:
+    theme: cosmo
+    css: styles.css
