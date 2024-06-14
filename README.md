@@ -1,6 +1,3 @@
-Contents
----------
+# PainpointsPurelyTechnical Blog site
 
-`/docs/`: My personal blog site
-
-    To serve the blog site, `SITE=../site make -C blog/pages-gem server`
+To serve locally, `quarto preview`

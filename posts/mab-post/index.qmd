@@ -1,14 +1,11 @@
 ---
 title: "ML Strategy: Bandits for Personalization"
-last_modified_at: 2021-09-14
-categories:
-  - ML
-tags:
-  - multi-arm bandits
-  - personalization
-  - ML / AI
+author: "Joshua Mabry, Rich Lichtenstein, and Janani Sriram"
+date: "2021-09-14"
+categories: [personalization, multi-arm bandits, ML]
+
 ---
-*Originally appeared on [Bain.com](https://www.bain.com/insights/rolling-out-multiarmed-bandits-for-fast-adaptive-experimentation/) and was authored by me, Rich Lichtenstein, and Janani Sriram to share our collective wisdom on introducing bandits for personalization.*
+*Originally appeared on [Bain.com](https://www.bain.com/insights/rolling-out-multiarmed-bandits-for-fast-adaptive-experimentation/).*
 
 # Rolling Out Multiarmed Bandits for Fast, Adaptive Experimentation
 ## At a Glance
@@ -33,8 +30,8 @@ Moreover, multivariate testing (MVT), which is a more powerful approach that can
 Marketers can gain greater value by adopting adaptive experimentation approaches that more efficiently optimize customer engagement or financial metrics. These highly automated and always-on tools dynamically steer traffic toward winning marketing messages, decreasing the cost of testing caused by lost conversions. We have seen retailers realize double-digit sales increases by setting their ambitions higher and by automating the testing process using these advanced approaches. One of the most effective algorithms is the multiarmed bandit (MAB), which can be applied to use cases ranging from offer optimization to dynamic pricing. Because the MAB is always optimizing, we see persistent lift even for daily customer contacts (see Figure 1).
 
 <figure>
-  <img src="/assets/images/01fig-10869-adaptive-experimentation.gif" alt="Figure1">
-  <figcaption>Figure 1: Multiarmed bandit has several benefits over traditional A/B or multivariate testing</figcaption>
+  <img src="adaptive-experimentation.gif" alt="Figure1" style="width:100%;">
+  <figcaption style="color:black;">Figure 1: Multiarmed bandit has several benefits over traditional A/B or multivariate testing</figcaption>
 </figure>
 
 MABs provide a simple, robust solution for sequential decision making during periods of uncertainty. To build an intelligent and automated campaign, a marketer begins with a set of actions (such as which coupons to deliver) and then selects an objective (such as maximizing clickthrough rates or EBITDA for email marketing). The algorithm balances exploration (gathering more data on new actions) with exploitation (selecting actions that perform well). The goal here is to select actions that maximize the payoff and quickly converge on the best set of actions. As market conditions change, the campaigns can easily be reset to discover new winners, or in more sophisticated designs, they can be configured to continue the testing cycle indefinitely.
