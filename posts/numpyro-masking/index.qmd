@@ -6,13 +6,13 @@ categories: [Bayesian, NumPyro, Code]
 image: "pyro.png"
 ---
 
-For building Bayesian models, NumPyro offers flexibility, speed, and near limitless extensiblity. There is a price to pay to for all that power as the API can at times be intimidating and hard to decipher. Some of the most important building blocks in Numpyro are [effect handlers](https://num.pyro.ai/en/stable/handlers.html). Effect handlers allow us to modify how random variables are conditioned, sampled, or observed inside our probabilistic program.
+For building Bayesian models, NumPyro offers flexibility, speed, and near limitless extensiblity. There is a price to pay for all that power as the API can at times be intimidating and hard to decipher. Some of the most important building blocks in Numpyro are [effect handlers](https://num.pyro.ai/en/stable/handlers.html). Effect handlers allow us to modify how random variables are conditioned, sampled, or observed inside our probabilistic program.
 
 While working on building factorized models for predicting consumer-level purchasing behavior, I ran across the need to use the *mask* handler so that I could mask certain observations during modeling training. I couldn't find any minimal examples on how to use the handler that gave me confidence I really understood the intendend usage pattern so I created a simulated dataset to test it out.  
 
 ## Problem Setup and Model Description
 
-We are interested in building a factorized model of retail shopping, where a customer with features $X$ decides whether or not to visit a store and which items in the store to purchase if they do visit. This means that to train the item choice model, we will want to mask observations from any customers that choose not to visit the store. 
+We are interested in building a factorized model of retail shopping, where a customer with features $X$ decides whether or not to visit a store, $Y_0$, and which items in the store to purchase if they do visit, $Y_1$. This means that to train the item choice model, we will want to mask observations from any customers that choose not to visit the store. 
 
 Let $X \in \mathbb{R}^D$  be a vector of features of length $D$. We aim to model the joint probability $P(Y_0, Y_1 | X)$ where:
 
@@ -31,15 +31,43 @@ The NumPyro model that allows for masked observations is defined as follows:
 
 ```python
 def _logit_choice_model(X, name_prefix, n_outputs):
+    """ Helper function to define a logistic regression model.
+    
+    Parameters
+    ----------
+    X: jnp.ndarray
+        Array of customer features of shape (N, D) where N is the number of observations and D is the number of features.
+    name_prefix: str
+        Prefix for the model parameters.
+    n_outputs: int
+        Number of output classes.
+    """
+
     n_features = X.shape[1]
     beta = numpyro.sample(f'{name_prefix}_beta', dist.Normal(jnp.zeros((n_outputs, n_features)), jnp.ones((n_outputs, n_features))))
     intercept = numpyro.sample(f'{name_prefix}_intercept', dist.Normal(jnp.zeros(n_outputs), 1.))
     linear_combination = jnp.einsum('ij,kj->ik', X, beta) + intercept
     return jax.nn.sigmoid(linear_combination)
 
-def mask_handler_model(X, I, y0=None, y1=None):
+def joint_decision_model(X, I, y0=None, y1=None):
     """Model of joint store visit and item choice decisions.
+
+    Parameters
+    ----------
+    X: jnp.ndarray
+        Array of customer features of shape (N, D) where N is the number of observations and D is the number of features.
+    I: int 
+        Number of items to choose from.
+    y0: jnp.ndarray
+        Boolean array of store visit decisions of shape (N, 1).
+    y1: jnp.ndarray
+        Boolean array of item choice decisions of shape (N, I).
+
+    Returns
+    -------
+    None
     """
+
     # Model P(Y0 | X)
     P_Y0 = _logit_choice_model(X, 'Y0', 1).squeeze()
 
