@@ -1,0 +1,115 @@
+---
+title: "The Demo Gap: Why Cloud Frameworks Need Better Template Projects"
+author: "Joshua Mabry"
+date: "2025-06-11"
+categories: [MLOps, Cloud, Open Source, LLM]
+image: "dr-evil-ai-meme.jpg"
+---
+
+Even with AI assistants galore these days, smooth demos were hard to come by at the Databricks AI & Data conference in SF this week. In session after session, I watched developers and evangelists copy and paste enormous amounts of configuration metadata and even code in shiny cloud portals. By the end of the talks, we often found oursevles just a few more clicks away from deploying the godlike, superintelligent agent running on the lakehouse that we should *definitely expect* to get working this year.
+
+To be fair, with enough time, effort, and support tickets, I'm sure these solutions could work. And I actually felt comforted knowing that the presenters live in the same enterprise glop that most of us developers find ourselves in day-to-day. 
+
+For example, take a look at a page like [Review App](https://learn.microsoft.com/en-us/azure/databricks/mlflow3/genai/human-feedback/concepts/review-app) in the Databricks documentation. The feature looks polished and promising for enabling LLM agent developers to get feedback from SMEs. But then think about what else needs to be in place for a minimal starter repository to actually leverage such a tool... the gap is huge!
+
+What's missing includes:
+
+- **Complete project structure** - How do I organize my codebase to work with this feature?
+- **Authentication setup** - What service accounts, roles, and permissions do I need?
+- **Environment configuration** - How do I handle secrets, environment variables, and deployment configs?
+- **Dependencies and packaging** - What libraries, versions, and build systems are required?
+- **Integration patterns** - How does this fit with my existing LLMOps pipeline?
+- **Testing and validation** - How do I know if it's working correctly?
+
+## The Cost of Incomplete Examples
+
+This documentation gap has real costs:
+
+- **Increased time-to-value** - Teams spend weeks reverse-engineering basic setup instead of focusing on their core use case
+- **Higher barrier to adoption** - Potential users bounce off incomplete examples and choose competitors
+- **Reduced customer success** - Even paying customers struggle to get value from sophisticated features
+- **Slower feedback loops** - When customers can't easily try features, platform providers miss critical usability insights
+
+
+## Contrasting with open source
+
+What's funny about this predicament is that the open-source community has already cracked this nut. The best open-source tools provide complete, working examples that you can clone, modify, and deploy immediately. They understand that **examples are not just documentation—they're the primary interface for developer onboarding**. Think of all the Streamlit apps, Prophet forecasting models, and Langchain chatbots that have been spawned from this approach.
+
+I'm not just picking on the organizers here—this reflects a broader challenge across cloud platform providers when it comes to bridging the gap between impressive presentations and practical implementations. I suspect this is why so many of my colleagues prefer to start with the latest open-source projects, where starter projects are the norm, not the exception.  
+
+## A Positive Example: PDF Document Ingestion Accelerator
+
+Going against the grain, Qian Yu from Databricks gave a solutions-oriented talk "PDF Document Ingestion Accelerator for GenAI Applications." The slides reflected content already available in the open-source repo [PDF Ingestion Databricks Asset Bundle](https://github.com/qian-yu-db/pdf_ingestion_DAB). This template demonstrates exactly what I wish I'd seen more of at the conference—a complete, production-ready solution that you can actually deploy and customize.
+
+Here's what stood out:
+
+**Complete Architecture**: The template includes everything from data ingestion pipelines to error handling, retry logic, and performance optimization. It's not just a proof of concept—it's a scalable solution for processing large volumes of unstructured documents.
+
+**Multiple Deployment Modes**: With simple commands like `databricks bundle deploy --target dev` or `databricks bundle deploy --target prod`, you can deploy the entire infrastructure across environments. The configuration handles everything from cluster sizing to checkpoint management.
+
+**Comprehensive Testing**: The project includes unit tests, integration tests, and even benchmarking scripts. You can validate your setup before deployment and measure performance across different cluster configurations.
+
+**Real Configuration Management**: Instead of hardcoded values, the template uses proper configuration management with customizable variables for catalogs, schemas, volumes, worker counts, and processing strategies.
+
+This is the kind of template that makes complex cloud features accessible to practitioners.
+
+## What Great Template Projects Look Like
+
+The PDF ingestion DAB shows us what effective templates need:
+
+**The key insight**: Each template should be a complete, deployable application that demonstrates the feature in a realistic context, not just isolated code snippets.
+
+## Analyzing What Makes Effective Templates
+
+Looking at the PDF ingestion DAB, several patterns emerge that distinguish great templates:
+
+### **Simple Start, Deep Customization**
+You can get started with just:
+```bash
+databricks bundle init pdf_ingestion_template
+databricks bundle deploy --target dev
+```
+
+But you can customize everything—cluster configurations, parsing strategies, retry logic—through well-documented variables.
+
+### **Production-Ready from Day One**
+This isn't a toy example. It includes streaming data processing, error handling with exponential backoff, async processing for large files, and comprehensive logging.
+
+### **Complete Testing Strategy**
+Unit tests, integration tests, benchmarks, and validation scripts. You know it works before you deploy.
+
+### **GitOps-Ready**
+Everything is version-controlled and deployment-ready with Infrastructure as Code, environment-specific configurations, and proper dependency management.
+
+## Making It Easier for Customers
+
+When cloud providers embrace this approach, it creates a virtuous cycle:
+
+1. **Faster customer onboarding** - Teams can evaluate and adopt features quickly
+2. **Higher feature adoption** - Complete examples remove friction from experimentation  
+3. **Better product feedback** - Customers can actually use features and provide meaningful input
+4. **Reduced support burden** - Self-service examples answer most common questions
+5. **Community contributions** - Open templates encourage community improvements and extensions
+
+## The Path Forward
+
+To cloud platform providers: invest in complete, working template projects for every major feature. Make them open source. Encourage community contributions. Treat them as first-class products, not afterthoughts.
+
+The Databricks PDF ingestion template shows this is possible. When done right, these templates become force multipliers that dramatically accelerate customer success and platform adoption.
+
+To customers: when evaluating platforms, prioritize those with comprehensive examples. Vote with your wallets for vendors who make your life easier, not harder. And when you find great templates like the PDF ingestion DAB, contribute back—file issues, submit improvements, and help make them even better.
+
+## The Demo-to-Deployment Bridge
+
+The gap between demo and deployment doesn't have to be this wide. We have the tools and patterns to fix this:
+
+- **Complete template repositories** with working examples
+- **Infrastructure as Code** that eliminates environment drift
+- **Comprehensive testing** that builds confidence
+- **Community-driven improvements** that surface real-world use cases
+
+The most successful developer platforms understand that **great templates are not a cost center—they're a competitive advantage**. When customers can go from idea to production in hours instead of weeks, everyone wins.
+
+Let's prioritize complete examples over polished presentations. Let's make it easier for everyone to build amazing things.
+
+*What's your experience with cloud platform demos and documentation? Have you found vendors who do this well? I'd love to hear about it—reach out if you have examples worth sharing!*
