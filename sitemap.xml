@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jmabry.github.io/index.html</loc>
-    <lastmod>2024-07-12T23:11:09.706Z</lastmod>
+    <loc>https://jmabry.github.io/about.html</loc>
+    <lastmod>2025-06-12T00:43:50.771Z</lastmod>
   </url>
   <url>
     <loc>https://jmabry.github.io/posts/mab-post/index.html</loc>
-    <lastmod>2024-07-12T23:11:09.706Z</lastmod>
+    <lastmod>2025-06-12T00:43:50.771Z</lastmod>
   </url>
   <url>
-    <loc>https://jmabry.github.io/about.html</loc>
-    <lastmod>2024-07-12T23:11:09.706Z</lastmod>
+    <loc>https://jmabry.github.io/posts/template-projects/index.html</loc>
+    <lastmod>2025-06-12T00:43:50.772Z</lastmod>
   </url>
   <url>
     <loc>https://jmabry.github.io/posts/numpyro-masking/index.html</loc>
-    <lastmod>2024-07-12T23:11:09.706Z</lastmod>
+    <lastmod>2025-06-12T00:43:50.771Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jmabry.github.io/index.html</loc>
+    <lastmod>2025-06-12T00:43:50.771Z</lastmod>
   </url>
 </urlset>

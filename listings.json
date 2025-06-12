@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/template-projects/index.html",
       "/posts/numpyro-masking/index.html",
       "/posts/mab-post/index.html"
     ]
