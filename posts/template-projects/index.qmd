@@ -1,0 +1,48 @@
+---
+title: "The Demo Gap: Why the Major Clouds Need Better Starter Projects"
+author: "Joshua Mabry"
+date: "2025-06-11"
+categories: [LLMOps, Cloud, Open-Source]
+image: "dr-evil-ai-meme.jpg"
+---
+
+Even with AI assistants galore these days, smooth demos were hard to come by at the Databricks AI & Data conference in SF this week. In session after session, I watched developers and their evangelists copy-and-paste enormous amounts of configuration data and app code into shiny cloud portals. By the end of the talks, we often found ourselves just a few more clicks away from deploying the godlike, superintelligent agents running on the lakehouse that we all should *definitely expect* to get working this year.
+
+So what do we take with us after we throw out our name badges and go back to the home office? After hearing about the new Databricks labeling tool, for example, I can look at the [docs](https://learn.microsoft.com/en-us/azure/databricks/mlflow3/genai/human-feedback/concepts/review-app). But then I think about the boilerplate needed to actually leverage such a tool:
+
+- **Authentication setup** - What service accounts, roles, and permissions do I need?
+- **Environment configuration** - How do I handle secrets, environment variables, and deployment configs?
+- **Dependencies and packaging** - What libraries, versions, and build systems are required?
+- **Integration patterns** - How does this fit with my existing LLMOps pipeline?
+- **Testing and validation** - How do I know if it's working correctly?
+
+This documentation gap creates real friction for teams, including **increased time-to-value** and **slower feedback loops**.
+
+## Contrasting with Open Source
+
+The open-source community has already solved this challenge. The best open-source tools provide complete, working examples that you can clone, modify, and deploy immediately. They understand that **examples are not just documentation—they're the primary interface for developer onboarding**. Think of all the Streamlit apps, Prophet forecasting models, and Langchain chatbots that have been spawned from this approach.
+
+This reflects a broader challenge across cloud platform providers when it comes to bridging the gap between impressive presentations and practical implementations. 
+
+## A Positive Example: PDF Document Ingestion Accelerator
+
+Going against the grain this year, Qian Yu from Databricks gave a solutions-oriented talk, "PDF Document Ingestion Accelerator for GenAI Applications." The slides reflected content already available in the open-source repo [PDF Ingestion Databricks Asset Bundle](https://github.com/qian-yu-db/pdf_ingestion_DAB). 
+
+Here's what stood out:
+
+**Complete Architecture**: The template includes everything from data ingestion pipelines to error handling, retry logic, and performance optimization. It's not just a proof of concept—it's a scalable solution for processing large volumes of unstructured documents.
+
+**Multiple Deployment Modes**: With simple commands like `databricks bundle deploy --target dev` or `databricks bundle deploy --target prod`, you can deploy the entire infrastructure across environments. The configuration handles everything from cluster sizing to checkpoint management.
+
+**Comprehensive Testing**: The project includes unit tests, integration tests, and even benchmarking scripts. You can validate your setup before deployment and measure performance across different cluster configurations.
+
+**Real Configuration Management**: Instead of hardcoded values, the template uses proper configuration management with customizable variables for catalogs, schemas, volumes, worker counts, and processing strategies.
+
+This is the kind of template that makes complex cloud features accessible to practitioners.
+
+## My parting thoughts
+
+To cloud platform providers: invest in complete, working template projects for every major feature. Make them open source. Encourage community contributions. Treat them as first-class products, not afterthoughts.
+
+To the tech leaders who get to decide what gets built: when evaluating platforms, prioritize those with comprehensive examples. Vote with your wallets for vendors who make your life easier, not harder. Be open to the open-source/freemium tools that will shorten the dev cycle.    
+
